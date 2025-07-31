@@ -7,11 +7,9 @@ const {
 
 module.exports = defineConfig({
   e2e: {
-    // É uma boa prática definir os arquivos .feature aqui
     specPattern: "**/*.feature",
     baseUrl: "http://www.kasa.live",
     async setupNodeEvents(on, config) {
-      // Adiciona o plugin do Cucumber
       await addCucumberPreprocessorPlugin(on, config);
 
       on(
@@ -38,7 +36,6 @@ module.exports = defineConfig({
         })
       );
 
-      // Retorna a configuração modificada para o Cypress
       return config;
     },
   },
