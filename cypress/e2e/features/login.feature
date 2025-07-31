@@ -2,16 +2,28 @@
 Funcionalidade: Login
   Como um usuário
   Eu quero acessar minha conta
-  Para utilizar as funcionalidades exclusivas do sistema.
+  Para utilizar as funcionalidades exclusivas do sistema
+
+ Contexto:
+    Dado que estou na página inicial
 
   @CT-29
   Cenário: Login com credenciais válidas
-    Dado que estou na página inicial
     Quando faço login com o email "pedrotestesrma@gmail.com" e senha "userteste"
     Então devo ver meu perfil logado
 
   @CT-30
   Cenário: Login com senha inválida
-    Dado que estou na página inicial
-    Quando faço login com o email "usuario@teste.com" e senha "senhaErrada"
+    Quando tento fazer login com o email "emailErrado@teste.com" e senha "senhaErrada"
     Então devo ver uma mensagem de erro de autenticação
+
+
+  @CT-30
+  Cenário: Login com email vazio
+    Quando tento fazer login com o email " " e senha "senhaErrada"
+    Então devo ver uma mensagem de erro no campo de email
+
+  @CT-30
+  Cenário: Login com senha vazia
+    Quando tento fazer login com o email "emailErrado@teste.com" e senha " "
+    Então devo ver uma mensagem de erro no campo de senha

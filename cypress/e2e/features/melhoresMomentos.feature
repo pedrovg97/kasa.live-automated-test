@@ -1,38 +1,25 @@
 # language: pt
 Funcionalidade: Melhores Momentos
+
   Como um usuário
-  Eu quero poder assistir e filtrar vídeos de melhores momentos
-  Para rever os lances mais importantes das partidas.
+  Eu quero poder assistir e vídeos de melhores momentos
+  Para rever os lances importantes das partidas
+
+  Contexto:
+    Dado que estou logado no sistema
 
 
-
-  @CT-18
+  @CT-18 
   Cenário: Reproduzir um vídeo de melhores momentos
     Dado que estou na aba "Melhores Momentos"
     Quando eu clico na miniatura de um vídeo
-    Então um player de vídeo deve abrir e iniciar a reprodução.
+    Então um player de vídeo deve abrir e iniciar a reprodução
 
-  @CT-19
-  Cenário: Filtrar melhores momentos por time
+  @CT-18 
+  Cenário: Fechar um vídeo de melhores momentos
     Dado que estou na aba "Melhores Momentos"
-    Quando eu seleciono um "Time X" no filtro de "Times"
-    Então a listagem de vídeos deve ser atualizada para exibir apenas os melhores momentos de partidas do time selecionado.
+    Quando eu clico na miniatura de um vídeo
+    E fecho a reproduçao do video
+    Então devo voltar para a lista de melhores momentos
 
-  @CT-20
-  Cenário: Filtrar melhores momentos por campeonato
-    Dado que estou na aba "Melhores Momentos"
-    Quando eu seleciono um "Campeonato X" no filtro de "Campeonatos"
-    Então a listagem de vídeos deve ser atualizada para exibir apenas os melhores momentos de partidas do campeonato selecionado.
 
-  @CT-21
-  Cenário: Combinar filtros de time e campeonato
-    Dado que estou na aba "Melhores Momentos"
-    Quando eu seleciono um "Time X"
-    E seleciono um campeonato que o time participa
-    Então a listagem deve exibir apenas os melhores momentos do time no campeonato selecionado.
-
-  @CT-22
-  Cenário: Verificar filtro sem resultados
-    Dado que estou na aba "Melhores Momentos"
-    Quando eu aplico um filtro que não retorna vídeos
-    Então o sistema deve exibir uma mensagem clara, como "Nenhum vídeo encontrado para os filtros selecionados".

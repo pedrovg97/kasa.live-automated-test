@@ -7,7 +7,7 @@ Funcionalidade: Integração com Google Calendar
   Contexto:
     Dado que estou logado no sistema
     
-  @only
+  @CT- @happy_path
   Cenário: Disponibilidade do botão de conectar ao Google Calendar
     Quando acesso as informações do meu perfil
     Então vejo a opção de "Conectar com seu Google Calendar"

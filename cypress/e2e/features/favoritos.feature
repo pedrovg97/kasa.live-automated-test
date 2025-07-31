@@ -3,11 +3,10 @@ Funcionalidade: Gerenciamento de Favoritos
 
   Como um usuário do sistema
   Eu quero poder adicionar e remover times da minha lista de favoritos
-  Para que eu possa acompanhar facilmente o que é mais importante para mim.
+  Para que eu possa acompanhar facilmente o que é mais importante para mim
 
   Contexto:
     Dado que estou logado no sistema
-
 
   @CT-01
   Cenário: Adicionar um novo time aos favoritos
