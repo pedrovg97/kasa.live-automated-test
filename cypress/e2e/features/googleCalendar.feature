@@ -4,6 +4,7 @@ Funcionalidade: Integração com Google Calendar
   Eu quero poder sincronizar as partidas com minha agenda do Google
   Para ser notificado e não perder nenhum jogo importante.
 
+
   @CT-23
   Cenário: Conectar a conta do Google Calendar com sucesso
     Dado que eu não tenho uma conta Google conectada

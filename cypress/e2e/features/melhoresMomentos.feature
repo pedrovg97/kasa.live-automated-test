@@ -4,6 +4,8 @@ Funcionalidade: Melhores Momentos
   Eu quero poder assistir e filtrar vídeos de melhores momentos
   Para rever os lances mais importantes das partidas.
 
+
+
   @CT-18
   Cenário: Reproduzir um vídeo de melhores momentos
     Dado que estou na aba "Melhores Momentos"

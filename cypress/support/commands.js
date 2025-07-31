@@ -3,8 +3,11 @@ Cypress.Commands.add('login', (email, password) => {
   cy.get('[data-cy="login-email"]').type(email);
   cy.get('[data-cy="login-password"]').type(password);
   cy.intercept('GET', '**/profile').as('loginOK');
+  cy.intercept('GET', '**/favorite-matches').as('favoriteMatches');
   cy.get('[data-cy="login-submit"]').click();
   cy.wait('@loginOK');
+  cy.wait('@favoriteMatches');
+
 });
 
 Cypress.Commands.add('logout', ( ) => {

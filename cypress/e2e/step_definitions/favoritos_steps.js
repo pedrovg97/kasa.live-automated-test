@@ -1,11 +1,6 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-// --- Hooks e Passos de Contexto ---
-
-Given('que estou logado no sistema', () => {
-  cy.visit('/');
-  cy.login('pedrotestesrma@gmail.com', 'userteste');
-});
+// --- Given ---
 
 
 Given('que o time {string} está na minha lista de favoritos', (teamName) => {
@@ -13,7 +8,7 @@ Given('que o time {string} está na minha lista de favoritos', (teamName) => {
 });
 
 
-// --- Passos de Ação (When) ---
+// --- When ---
 
 When('eu adiciono o time {string} aos favoritos', (teamName) => {
   cy.intercept('GET', '**/team-favorite').as('getFavorites');
@@ -51,7 +46,7 @@ When('faço login novamente', () => {
   cy.login('pedrotestesrma@gmail.com', 'userteste');
 });
 
-// --- Passos de Verificação (Then) ---
+// --- Then ---
 
 Then('o time {string} deve aparecer na minha lista de "Times favoritos"', (teamName) => {
   cy.get(`[title="${teamName}"]`).should('be.visible');
