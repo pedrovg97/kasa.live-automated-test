@@ -1,86 +1,70 @@
-import { Given, When, Then, Before } from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Before(() => {
-    cy.clearFirebaseSession()
-    cy.visit('/');
-    cy.login('pedrotestesrma@gmail.com', 'userteste')
+// --- Hooks e Passos de Contexto ---
+
+Given('que estou logado no sistema', () => {
+  cy.visit('/');
+  cy.login('pedrotestesrma@gmail.com', 'userteste');
 });
 
-//Adicionar um novo time aos favoritos
-Given('que eu estou na aba favoritos', () => {
+
+Given('que o time {string} está na minha lista de favoritos', (teamName) => {
+  cy.addFavoriteTeam(teamName); 
+});
+
+
+// --- Passos de Ação (When) ---
+
+When('eu adiciono o time {string} aos favoritos', (teamName) => {
+  cy.intercept('GET', '**/team-favorite').as('getFavorites');
   cy.get('[data-cy="link/favoritos"]').click();
-});
-When('clico em "Favoritar time"', () => {
+  cy.wait('@getFavorites');
   cy.get('[data-cy="btn-favorite-team"]').click();
-});
-When('pesquiso por um time', () => {
-  cy.get('[data-cy="input-search-teams"]').type('Olaria');  
-}); 
-When('clico em "Add"', () => {
+  cy.get('[data-cy="input-search-teams"]').type(teamName);
   cy.contains('Add').click();
-});
-When('clico em "Concluir"', () => {
-  cy.get('[data-cy="btn-submit-teams"]').click(); 
-}); 
-Then('o novo time deve aparecer na minha lista de "Times favoritos".', () => {
-  cy.get('[title="Olaria"]').should('be.visible');
+  cy.get('[data-cy="btn-submit-teams"]').click();
 });
 
-//Remover um time da lista de favoritos
-Given('que um time já está na minha lista de favoritos', () => {
-  cy.addFavoriteTeam('Maringá FC');
-});
-When('clico em "Editar"', () => {
+When('eu removo o time {string} dos favoritos', (teamName) => {
+  cy.get('[data-cy="link/favoritos"]').click();
   cy.get('[data-cy="btn-edit-teams"]').click();
-});
-When('clico no "X" abaixo do time', () => {
-  cy.get('[title="Maringá FC"]').then(() => {
-    cy.get('.chakra-button.css-di3rc').click();  
-  });  
-}); 
-When('depois clico em "Salvar"', () => {
+  cy.get(`[title="${teamName}"]`).parent().find('.chakra-button.css-di3rc').click();
   cy.get('[data-cy="btn-save-teams"]').click();
 });
-Then('o time não deve mais aparecer na minha lista de "Times favoritos"', () => {
-  cy.get('[title="Maringá FC"]').should('not.exist');
+
+When('eu navego para a aba de favoritos', () => {
+  cy.intercept('GET', '**/_next/data/*/favoritos.json*').as('getFavoritosData');
+  cy.get('[data-cy="link/favoritos"]').click();
+  cy.wait('@getFavoritosData');
 });
 
-//Visualizar partidas dos times favoritos
-Given('que adiciono um time como favorito', () => {
-  cy.addFavoriteTeam('Maringá FC');
-});
 
-When('desativo o toggle "Partidas favoritas"', () => {
+When('eu desativo o toggle "Partidas favoritas"', () => {
   cy.get('[data-cy="switch-favorites"]').click();
 });
 
-When('estou na listagem de partidas favoritas', () => {
-  cy.intercept('GET', '**/_next/data/*/favoritos.json').as('getFavoritosData');
-  cy.get('[data-cy="link/favoritos"]').click();
-  cy.wait('@getFavoritosData');
-
-}); 
-
-Then('devo ver os jogos dos meu time favorito', () => {
-  cy.get('.css-7mca6u').contains('Maringá').should('be.visible');
+When('eu faço logout"', () => {
+  cy.logout().click();
 });
 
-//Partidas do time são ocultadas das favoritas após remove-lo dos times favoritos  
-Given('que tenho um time como favorito', () => {
-  cy.addFavoriteTeam('Maringá FC');
+When('faço login novamente', () => {
+  cy.login('pedrotestesrma@gmail.com', 'userteste');
 });
 
-When('removo o time dos favoritos', () => {
-  cy.removeFavoriteTeam('Maringá FC');
+// --- Passos de Verificação (Then) ---
+
+Then('o time {string} deve aparecer na minha lista de "Times favoritos"', (teamName) => {
+  cy.get(`[title="${teamName}"]`).should('be.visible');
 });
 
-When('vejo a listagem de partidas favoritas', () => {
-  cy.intercept('GET', '**/_next/data/*/favoritos.json').as('getFavoritosData');
-  cy.get('[data-cy="link/favoritos"]').click();
-  cy.wait('@getFavoritosData');
+Then('o time {string} não deve mais aparecer na minha lista de "Times favoritos"', (teamName) => {
+  cy.get(`[title="${teamName}"]`).should('not.exist');
+});
 
-}); 
+Then('devo ver os jogos do time {string}', (teamName) => {
+  cy.get('.css-7mca6u').contains(teamName).should('be.visible');
+});
 
-Then('as partidas desse time não devem aparecer na lista de partidas favoritas', () => {
-  cy.get('.css-7mca6u').contains('Maringá').should('not.exist');
+Then('a lista de partidas favoritas deve ser ocultada', () => {
+  cy.get('.css-7mca6u').should('not.exist'); // Exemplo
 });

@@ -1,9 +1,10 @@
 Cypress.Commands.add('login', (email, password) => {
-
   cy.get('[data-cy="btn-trigger-profile"]').should('be.visible').click();
   cy.get('[data-cy="login-email"]').type(email);
   cy.get('[data-cy="login-password"]').type(password);
+  cy.intercept('GET', '**/profile').as('loginOK');
   cy.get('[data-cy="login-submit"]').click();
+  cy.wait('@loginOK');
 });
 
 Cypress.Commands.add('logout', ( ) => {
@@ -29,18 +30,19 @@ Cypress.Commands.add('clearFirebaseSession', () => {
   });
 });
 
-Cypress.Commands.add('addFavoriteTeam', (team) => { 
-  cy.get('[data-cy="link/favoritos"]').click();
-  cy.get('[data-cy="btn-favorite-team"]').click();
+Cypress.Commands.add('addFavoriteTeam', (team) => {
+  cy.get('body').then(($body) => {
+    if ($body.find(`[title="${team}"]`).length === 0) {
+      cy.get('[data-cy="link/favoritos"]').click();
+      cy.get('[data-cy="btn-favorite-team"]').click();
+      cy.intercept('GET', 'https://kasalive.api.prod.loomi.com.br/api/1.0/team/?page=1&name=*').as('searchTeam');
+      cy.get('[data-cy="input-search-teams"]').type(team);
+      cy.wait('@searchTeam');
+      cy.contains('Add').click();
+      cy.get('[data-cy="btn-submit-teams"]').click();
 
-  cy.intercept('GET', 'https://kasalive.api.prod.loomi.com.br/api/1.0/team/?page=1&name=*').as('searchTeam');
-  cy.get('[data-cy="input-search-teams"]').type(team);  
-
-  cy.wait('@searchTeam');
-
-  cy.contains('Add').click();
-  cy.get('[data-cy="btn-submit-teams"]').click(); 
-
+    } 
+  });
 });
 
 Cypress.Commands.add('removeFavoriteTeam', (team) => { 
