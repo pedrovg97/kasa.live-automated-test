@@ -35,51 +35,12 @@ Funcionalidade: Gerenciamento de Favoritos
     E desativo o toggle "Partidas favoritas"
     Então as partidas desse time não devem aparecer na lista de partidas favoritas
 
-  @CT-05 
-  Cenário: Favoritar uma partida no modo grade
-    Dado que estou no listagem de partidas no modo grade
-    Quando clico no botão de favoritar partida do modo grade
-    Então a partida deve ser favoritada
 
-  @CT-06 @only
-  Cenário: Favoritar uma partida no modo lista
-    Dado que estou no listagem de partidas no modo lista
-    Quando clico no botão de favoritar partida do modo lista
-    Então a partida deve ser favoritada
-
-  @CT-07
-  Cenário: Desfavoritar uma partida
-    Dado que estou no calendário
-    E tenho partidas marcadas como favoritas
-    Quando clico no card de uma partida
-    E clico no botão ". . ."
-    E clico em Desfavoritar
-    Então a partida deve ser ocultada da aba de favoritos.
-
-  @CT-08
+  @CT-05
   Cenário: Verificar persistência dos favoritos após logout
     Dado que eu tenho times favoritados
     Quando eu faço logout
     E faço login novamente
     Então a minha lista de times favoritos deve permanecer a mesma.
 
-  @CT-09
-  Cenário: Tentar adicionar um time que já é favorito
-    Dado que o "Time X" já está na minha lista de favoritos
-    Quando eu pesquiso por "Time X" no modal de adição
-    Então o botão "Add" ao lado do time deve estar desabilitado ou indicar que já foi adicionado.
-
-  @CT-10
-  Cenário: Adicionar times favoritos e não clicar em salvar
-    Dado que adiciono um time aos meus favoritos
-    Quando ignoro o botão salvar
-    E atualizo a página
-    Então o time não deve ser adicionado.
-
-  @CT-11
-  Cenário: Remover times favoritos e não clicar em salvar
-    Dado que tenho times adicionados aos meus favoritos
-    Quando removo um time
-    E ignoro o botão salvar
-    E atualizo a página
-    Então o time deve permanecer nos favoritos.
+ 

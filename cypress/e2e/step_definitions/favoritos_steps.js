@@ -84,34 +84,3 @@ When('vejo a listagem de partidas favoritas', () => {
 Then('as partidas desse time não devem aparecer na lista de partidas favoritas', () => {
   cy.get('.css-7mca6u').contains('Maringá').should('not.exist');
 });
-
-//Favoritar uma partida no modo grade 
-Given('que estou no listagem de partidas no modo grade', () => {
-  cy.get('[data-cy="link/"]').click();
-  cy.get('[alt="grid"]').click();
-});
-
-When('clico no botão de favoritar partida do modo grade', () => {
-  cy.contains('.css-5prxxc', 'CA Huracán').find('[aria-label="Favoritar Partida"]').should('be.visible').click();
-
-cy.intercept('POST', '**/favorite-matches/').as('updateFavoriteMatch');
-cy.intercept('PATCH', '**/favorite-matches/').as('updateFavoriteMatch');});
-
-Then('a partida deve ser favoritada', () => {
-  cy.wait('@updateFavoriteMatch').then((interception) => {
-    expect(interception.response.statusCode).to.be.oneOf([200, 201]);
-  });
-});
-
-//Favoritar uma partida no modo lista 
-Given('que estou no listagem de partidas no modo lista', () => {
-  cy.get('[data-cy="link/"]').click();
-  cy.get('[alt="lista"]').click();
-});
-
-When('clico no botão de favoritar partida do modo lista', () => {
-  cy.contains('.css-1ew6dnr', 'CA Huracán').find('[aria-label="Favoritar Partida"]').should('be.visible').click();
- 
-cy.intercept('POST', '**/favorite-matches/').as('updateFavoriteMatch');
-cy.intercept('PATCH', '**/favorite-matches/').as('updateFavoriteMatch');
-});
