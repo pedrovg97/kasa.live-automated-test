@@ -1,5 +1,7 @@
+require('dotenv').config();
 
 const { defineConfig } = require("cypress");
+
 const webpack = require("@cypress/webpack-preprocessor");
 const {
   addCucumberPreprocessorPlugin,
@@ -9,6 +11,9 @@ module.exports = defineConfig({
   e2e: {
     specPattern: "**/*.feature",
     baseUrl: "http://www.kasa.live",
+    defaultCommandTimeout: 10000,
+    viewportWidth: 1920,
+    viewportHeight: 1080,
     async setupNodeEvents(on, config) {
       await addCucumberPreprocessorPlugin(on, config);
 
@@ -35,8 +40,11 @@ module.exports = defineConfig({
           },
         })
       );
-
       return config;
     },
   },
+  env: {
+    email: process.env.CYPRESS_email,
+    password: process.env.CYPRESS_password
+  }
 });

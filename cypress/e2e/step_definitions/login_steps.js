@@ -12,12 +12,15 @@ Given('que estou na página inicial', () => {
 
 
 // --- When ---
-When('faço login com o email {string} e senha {string}', (email, senha) => {
-  cy.login(email, senha);
+When('faço login com o email {string} e senha {string}', (email, password) => {
+  const finalEmail = email === 'valido' ? Cypress.env('email') : email;
+  const finalPassword = password === 'valida' ? Cypress.env('password') : password;
+
+  cy.login(finalEmail, finalPassword);
 });
 
-When('tento fazer login com o email {string} e senha {string}', (email, senha) => {
-  cy.login(email, senha, "failure");
+When('clico em sair', () => {
+  cy.get('[data-cy="btn-logout-profile"').click();
 });
 
 
@@ -36,4 +39,8 @@ Then('devo ver uma mensagem de erro no campo de email', () => {
 
 Then('devo ver uma mensagem de erro no campo de senha', () => {
   cy.contains('p','Digite sua senha para continuar.').should('be.visible');
+});
+
+Then('devo ver novamente a opção de entrar no site', () => {
+  cy.get('[data-cy="btn-trigger-profile"]').contains('Entrar').should('be.visible');
 });
