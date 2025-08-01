@@ -24,8 +24,6 @@ Cypress.Commands.add('login', (email, password, type) => {
   }
 });
 
-
-
 Cypress.Commands.add('logout', ( ) => {
   cy.get('[data-cy="btn-trigger-profile"]')
     .click();
