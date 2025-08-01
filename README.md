@@ -1,4 +1,4 @@
-## Como rodar os testes
+# Como rodar os testes
 
 ### 1. Clone o repositório
 
