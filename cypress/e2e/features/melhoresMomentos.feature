@@ -9,13 +9,13 @@ Funcionalidade: Melhores Momentos
     Dado que estou logado no sistema
 
 
-  @CT-18 
+  @CT-18 @happy_path @melhores_momentos
   Cenário: Reproduzir um vídeo de melhores momentos
     Dado que estou na aba "Melhores Momentos"
     Quando eu clico na miniatura de um vídeo
     Então um player de vídeo deve abrir e iniciar a reprodução
 
-  @CT-18 
+  @CT-19 @happy_path @melhores_momentos
   Cenário: Fechar um vídeo de melhores momentos
     Dado que estou na aba "Melhores Momentos"
     Quando eu clico na miniatura de um vídeo

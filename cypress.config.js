@@ -1,5 +1,7 @@
+require('dotenv').config();
 
 const { defineConfig } = require("cypress");
+
 const webpack = require("@cypress/webpack-preprocessor");
 const {
   addCucumberPreprocessorPlugin,
@@ -41,4 +43,8 @@ module.exports = defineConfig({
       return config;
     },
   },
+  env: {
+    email: process.env.CYPRESS_email,
+    password: process.env.CYPRESS_password
+  }
 });
