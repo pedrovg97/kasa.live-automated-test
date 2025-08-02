@@ -42,6 +42,10 @@ module.exports = defineConfig({
       );
       return config;
     },
+    retries: {
+      runMode: 2,
+      openMode: 0
+    },
   },
   env: {
     email: process.env.CYPRESS_email,
