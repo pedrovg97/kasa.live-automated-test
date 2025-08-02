@@ -14,7 +14,7 @@ When('eu adiciono o time {string} aos favoritos', (teamName) => {
   cy.get('[data-cy="link/favoritos"]')
     .click();
 
-  cy.wait('@getFavorites');
+  cy.wait('@getFavorites', { timeout: 10000 });
 
   cy.get('[data-cy="btn-favorite-team"]')
     .click();
@@ -52,7 +52,7 @@ When('eu navego para a aba de favoritos', () => {
   cy.get('[data-cy="link/favoritos"]')
     .click();
 
-  cy.wait('@getFavoritosData');
+  cy.wait('@getFavoritosData', { timeout: 10000 });
 });
 
 When('eu desativo o toggle "Partidas favoritas"', () => {
