@@ -25,8 +25,10 @@ When('clico em sair', () => {
 
 
 // --- Then ---
-Then('devo ver meu perfil logado', () => {
-  cy.get('[title="Pedro"]').should('be.visible');
+Then('devo ver as funcionalidade exclusivas do sistema', () => {
+  cy.get('[data-cy="link/favoritos"]').should('be.visible');
+  cy.get('[data-cy="link/calendario"]').should('be.visible');
+
 });
 
 Then('devo ver uma mensagem de erro de autenticação', () => {

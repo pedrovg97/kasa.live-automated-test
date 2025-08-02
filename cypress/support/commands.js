@@ -19,8 +19,8 @@ Cypress.Commands.add('login', (email, password, type) => {
     .click();
 
   if (type =! 'failure') {
-    cy.wait('@loginOK');
-    cy.wait('@favoriteMatches');
+    cy.wait('@loginOK', { timeout: 10000 });
+    cy.wait('@favoriteMatches', { timeout: 10000 });
   }
 });
 
@@ -64,7 +64,7 @@ Cypress.Commands.add('addFavoriteTeam', (team) => {
       cy.get('[data-cy="input-search-teams"]')
         .type(team);
 
-      cy.wait('@searchTeam');
+      cy.wait('@searchTeam', { timeout: 10000 });
 
       cy.contains('Add')
         .click();

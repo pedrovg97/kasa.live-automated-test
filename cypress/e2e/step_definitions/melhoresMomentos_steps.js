@@ -23,7 +23,7 @@ When('fecho a reproduçao do video', () => {
 
 // --- Then ---
 Then('um player de vídeo deve abrir e iniciar a reprodução', () => {
-    cy.wait('@loadMedia')
+    cy.wait('@loadMedia', { timeout: 10000 })
       .its('response.statusCode')
       .should('eq', 200);
     

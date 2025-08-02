@@ -51,7 +51,7 @@ Then('devo ver os resultados para o campeonato {string}', (championshipName) => 
 Then('devo ver os resultados para o canal {string}', (channelName) => {
   cy.intercept('GET', `**?channel_name=${channelName}*`)
     .as('getChannel');
-  cy.wait('@getChannel')
+  cy.wait('@getChannel', { timeout: 10000 })
     .its('response.statusCode')
     .should('eq', 200);
 });

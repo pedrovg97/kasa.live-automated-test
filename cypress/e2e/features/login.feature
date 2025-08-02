@@ -10,7 +10,7 @@ Funcionalidade: Login
   @CT-31 @happy_path @login
   Cenário: Login com credenciais válidas
     Quando faço login com o email "valido" e senha "valida"
-    Então devo ver meu perfil logado
+    Então devo ver as funcionalidade exclusivas do sistema
 
   @CT-32 @happy_path @login
   Cenário: Login com senha errada
