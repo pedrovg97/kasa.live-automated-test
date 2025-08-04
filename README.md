@@ -3,7 +3,7 @@
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
+git clone https://github.com/seu-user/kasa.live-automated-test.git
 ```
 ### 2. Instale as Dependências
 ```bash
@@ -11,6 +11,8 @@ npm install
 ```
 
 ### 3. Configure as Variáveis de Ambiente
+
+Crie um arquivo .env na raiz do projeto com as variaveis:
 ```bash
 CYPRESS_email=seu@email.com
 CYPRESS_password=sua_senha
